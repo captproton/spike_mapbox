@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  lat: MyString
+  lng: MyString
+  ev_connector_types: MyString
+  ev_dc_fast_num: MyString
+  ev_network: MyString
+  city: MyString
+  state: MyString
+  street_address: MyString
+  zip: MyString
+  country: MyString
+
+two:
+  name: MyString
+  lat: MyString
+  lng: MyString
+  ev_connector_types: MyString
+  ev_dc_fast_num: MyString
+  ev_network: MyString
+  city: MyString
+  state: MyString
+  street_address: MyString
+  zip: MyString
+  country: MyString

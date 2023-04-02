@@ -86,3 +86,7 @@ gem "sidekiq", "~> 6.2"
 gem "sitemap_generator", "~> 6.1"
 gem "whenever", require: false
 gem "responders", github: "heartcombo/responders", branch: "main"
+
+gem "httparty", "~> 0.21.0"
+
+gem "mapkick-rb", "~> 0.1.4"
