@@ -6,7 +6,7 @@ class PoisController < ApplicationController
         { lat: f.lat, 
           lng: f.lng, 
           label: f.name, 
-          tooltip: self.poi_details(f) 
+          tooltip: self.poi_details(f).downcase.titleize
         } 
       }
     else
@@ -59,6 +59,7 @@ class PoisController < ApplicationController
   end
 
   def poi_details(poi)
-    render_to_string partial: 'poi_details', locals: { poi: poi }
+    text = render_to_string partial: 'poi_details', locals: { poi: poi }
+    CGI.unescapeHTML(text).html_safe
   end
 end
