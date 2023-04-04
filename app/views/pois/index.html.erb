@@ -1,0 +1,12 @@
+<p>start map</p>
+<!-- map -->
+      <% if @pois.present? %>      
+        <%= js_map @poi_pins, height: "100vh"  %>
+        <% else %>
+        <%= js_map @poi_pins, 
+            zoom: 10, 
+            controls: true, 
+            height: "100vh", 
+            tooltips: {html: true}   %>
+      <% end %>
+<p>finish map</p>
