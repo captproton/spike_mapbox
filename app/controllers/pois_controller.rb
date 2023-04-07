@@ -2,11 +2,14 @@ class PoisController < ApplicationController
   def index
     if params[:city].present?
       @pois = Poi.where(city: params[:city]).where(state: params[:state])
+      # @pois = Poi.where('lower(city) = ?', "%#{params[:city].downcase}%") if params[:city].present?
+      # @pois = Poi.where('lower(city) ILIKE ?', "%#{params[:city].downcase}%") if params[:city].present?
       @poi_pins = @pois.map { |f| 
-        { lat: f.lat, 
-          lng: f.lng, 
-          label: f.name, 
-          tooltip: self.poi_details(f).downcase.titleize
+        { id:       f.id,
+          lat:      f.lat, 
+          lng:      f.lng, 
+          label:    f.name, 
+          tooltip:  self.poi_details(f).downcase.titleize
         } 
       }
     else
