@@ -1,22 +1,8 @@
-<script>
-  // get all the list items
-  const locationItems = document.querySelectorAll('.locations li');
-
-  // add event listener to each list item
-  locationItems.forEach(item => {
-    item.addEventListener('click', (event) => {
-      // get the data-location-id attribute value
-      const locationId = event.target.getAttribute('data-location-id');
-      
-      // use the locationId to locate the corresponding pin on the map and fly to it
-      map.flyTo({
-        center: [longitude, latitude],
-        zoom: 14,
-        essential: true
-      });
-    });
-  });
-</script>
+<style>
+  .active {
+    background-color: green;
+  }
+  </style>
 
 <p>start map</p>
 <div class="container">
@@ -68,6 +54,13 @@
     console.log(liElements)
     for (var i = 0; i < liElements.length; i++) {
       liElements[i].addEventListener('click', function() {
+        // make current element active
+        const activeItem = document.getElementsByClassName('active');
+        if (activeItem[0]) {
+          activeItem[0].classList.remove('active');
+        }
+        this.classList.add('active');
+
         // Get the data attributes of the clicked <li> element
         var locationId = this.getAttribute('data-location-id');
         var locationLat = this.getAttribute('data-location-lat');
