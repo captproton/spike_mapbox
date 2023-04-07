@@ -1,5 +1,47 @@
+<script>
+  // get all the list items
+  const locationItems = document.querySelectorAll('.locations li');
+
+  // add event listener to each list item
+  locationItems.forEach(item => {
+    item.addEventListener('click', (event) => {
+      // get the data-location-id attribute value
+      const locationId = event.target.getAttribute('data-location-id');
+      
+      // use the locationId to locate the corresponding pin on the map and fly to it
+      map.flyTo({
+        center: [longitude, latitude],
+        zoom: 14,
+        essential: true
+      });
+    });
+  });
+</script>
+
 <p>start map</p>
-<!-- map -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3" style="background-color: orange">
+      <!-- create a list of items -->
+      <ul class="locations">
+        <% if @pois.present? %>  
+
+          <% @pois.each do |poi| %>
+            <li data-location-id="<%= poi.id %>" data-location-lng="<%= poi.lng %>" data-location-lat="<%= poi.lat %>"  >
+              <%= poi.name %>
+            </li>
+          <% end  %>
+
+        <% else %>
+
+          <li> No cities found</li>
+
+        <% end %>
+        
+      </ul>
+
+    </div>
+    <div class="col-sm-9">
       <% if @pois.present? %>      
         <%= js_map @poi_pins, height: "100vh", 
             tooltips: {html: true}   %>
@@ -10,4 +52,39 @@
             height: "100vh", 
             tooltips: {html: true}   %>
       <% end %>
+
+    </div>
+  </div>
+</div>
+
 <p>finish map</p>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  // Your code here
+
+    // Add click event listener to all <li> elements
+    var liElements = document.getElementsByTagName('li');
+    console.log(liElements)
+    for (var i = 0; i < liElements.length; i++) {
+      liElements[i].addEventListener('click', function() {
+        // Get the data attributes of the clicked <li> element
+        var locationId = this.getAttribute('data-location-id');
+        var locationLat = this.getAttribute('data-location-lat');
+        var locationLng = this.getAttribute('data-location-lng');
+        // fly to the point
+        // Fly to a random location
+        map = Mapkick.maps["map-1"]["map"]
+        map.flyTo({
+        center: [locationLng, locationLat],
+        essential: false // this animation is considered essential with respect to prefers-reduced-motion
+        });
+        // Show an alert with the location latitude and longitude
+        // alert('Location ID: ' + locationId + '\nLatitude: ' + locationLat + '\nLongitude: ' + locationLng);
+
+      });
+    }
+
+  });
+
+</script>
